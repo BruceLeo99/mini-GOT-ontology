@@ -1,0 +1,407 @@
+@prefix : <http://www.example.org/yixin/game-of-thrones#> .
+@prefix got: <http://www.example.org/yixin/game-of-thrones/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.example.org/yixin/game-of-thrones> .
+
+<http://www.example.org/yixin/game-of-thrones> rdf:type owl:Ontology ;
+                                                rdfs:comment "A brief ontology of a few characters in Game of Thrones."@en ;
+                                                rdfs:label "Game of Thrones"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.example.org/yixin/game-of-thrones/childOf
+got:childOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/fromHouse
+got:fromHouse rdf:type owl:ObjectProperty ;
+              owl:inverseOf got:hasHouseMember ;
+              owl:propertyChainAxiom ( got:lordOf
+                                     ) .
+
+
+###  http://www.example.org/yixin/game-of-thrones/hasHouseMember
+got:hasHouseMember rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/hasMainTown
+got:hasMainTown rdf:type owl:ObjectProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/inLoveWith
+got:inLoveWith rdf:type owl:ObjectProperty ,
+                        owl:SymmetricProperty ;
+               owl:propertyDisjointWith got:marriedWith ;
+               rdfs:comment "This property is used to describe secret lovers (two persons who are married can be in love with each other obviously, but their love is not a \"secret\")."^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/lordOf
+got:lordOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/loves
+got:loves rdf:type owl:ObjectProperty ,
+                   owl:AsymmetricProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/marriedWith
+got:marriedWith rdf:type owl:ObjectProperty ,
+                         owl:SymmetricProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/raisedBy
+got:raisedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/serves
+got:serves rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.example.org/yixin/game-of-thrones/hasAlias
+got:hasAlias rdf:type owl:DatatypeProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/hasQuote
+got:hasQuote rdf:type owl:DatatypeProperty .
+
+
+###  http://www.example.org/yixin/game-of-thrones/ownsAnimal
+got:ownsAnimal rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.example.org/yixin/game-of-thrones/Bastards
+got:Bastards rdf:type owl:Class ;
+             rdfs:subClassOf got:Person ;
+             rdfs:comment "A person whose father is a lord but mother is not the lawful wife of the lord (or vice versa)."^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Claimed_rightful_heir
+got:Claimed_rightful_heir rdf:type owl:Class ;
+                          rdfs:subClassOf got:Person ;
+                          owl:disjointWith got:Rightful_heir ;
+                          rdfs:comment "A person who claims to have the right to inheret the position of the king, but is not recognized by the crown."^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Concil
+got:Concil rdf:type owl:Class ;
+           rdfs:subClassOf got:Crown_members ;
+           rdfs:comment "The members of concil that serves the Crown"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Crown_members
+got:Crown_members rdf:type owl:Class ;
+                  rdfs:subClassOf got:Person ;
+                  rdfs:comment "The persons who belong to the royal family (Not every person is a member of royal family)"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/House
+got:House rdf:type owl:Class ;
+          rdfs:comment "The name of houses in Game of Thrones"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/King
+got:King rdf:type owl:Class ;
+         rdfs:subClassOf got:Crown_members ;
+         rdfs:comment "The king in Game of Thrones"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Kings_guard
+got:Kings_guard rdf:type owl:Class ;
+                owl:equivalentClass [ owl:intersectionOf ( got:Crown_members
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty got:serves ;
+                                                             owl:someValuesFrom got:King
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
+                rdfs:subClassOf got:Person ;
+                rdfs:comment "The guards of king in Game of Thrones"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Lord
+got:Lord rdf:type owl:Class ;
+         rdfs:subClassOf got:Person ;
+         rdfs:comment "The person who rules a house"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Person
+got:Person rdf:type owl:Class ;
+           rdfs:comment "The characters in Game of Thrones"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Queen
+got:Queen rdf:type owl:Class ;
+          rdfs:subClassOf got:Crown_members ;
+          rdfs:comment "The queen in Game of Thrones"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Rightful_heir
+got:Rightful_heir rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty got:raisedBy ;
+                                        owl:someValuesFrom got:King
+                                      ] ;
+                  rdfs:subClassOf got:Person ;
+                  rdfs:comment "A person who has the lawful right to inheret the position of the king, and is recognized by the crown."^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Town
+got:Town rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.example.org/yixin/game-of-thrones/Balon_greyjoy
+got:Balon_greyjoy rdf:type owl:NamedIndividual ;
+                  got:fromHouse got:Greyjoy ;
+                  got:lordOf got:Greyjoy .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Baratheon
+got:Baratheon rdf:type owl:NamedIndividual ;
+              got:hasMainTown got:Storms_end ;
+              got:hasQuote "Ours is the fury"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Casterly_rock
+got:Casterly_rock rdf:type owl:NamedIndividual .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Catelyn_tully
+got:Catelyn_tully rdf:type owl:NamedIndividual ,
+                           got:Person ;
+                  got:fromHouse got:Tully ;
+                  got:marriedWith got:Ned_stark .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Cersei_lannister
+got:Cersei_lannister rdf:type owl:NamedIndividual ,
+                              got:Queen ;
+                     got:childOf got:Tywin_lannister ;
+                     got:fromHouse got:Lannister ;
+                     got:inLoveWith got:Jamie_Lannister ;
+                     got:marriedWith got:Robert_baratheon ;
+                     got:raisedBy got:Tywin_lannister .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Citadel
+got:Citadel rdf:type owl:NamedIndividual .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Daenerys_targaryan
+got:Daenerys_targaryan rdf:type owl:NamedIndividual ,
+                                got:Claimed_rightful_heir ;
+                       got:fromHouse got:Targaryen ;
+                       got:hasAlias "Khaleesi"^^rdfs:Literal ,
+                                    "Mother of Dragon"^^rdfs:Literal ;
+                       got:ownsAnimal "Drogon"^^rdfs:Literal ,
+                                      "Rhaegal"^^rdfs:Literal ,
+                                      "Viserion"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Greyjoy
+got:Greyjoy rdf:type owl:NamedIndividual ,
+                     got:House ;
+            got:hasMainTown got:Pyke ;
+            got:hasQuote "We do not sow"^^rdfs:Literal ,
+                         "What is dead may never dead"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Jamie_Lannister
+got:Jamie_Lannister rdf:type owl:NamedIndividual ,
+                             got:Crown_members ;
+                    got:childOf got:Tywin_lannister ;
+                    got:inLoveWith got:Cersei_lannister ;
+                    got:raisedBy got:Tywin_lannister ;
+                    got:serves got:Robert_baratheon ;
+                    got:hasAlias "Kingslayer" .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Joffery_baratheon
+got:Joffery_baratheon rdf:type owl:NamedIndividual ,
+                               got:Crown_members ;
+                      got:childOf got:Cersei_lannister ,
+                                  got:Jamie_Lannister ;
+                      got:fromHouse got:Lannister ;
+                      got:raisedBy got:Cersei_lannister ,
+                                   got:Robert_baratheon .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Jon_snow
+got:Jon_snow rdf:type owl:NamedIndividual ,
+                      got:Bastards ;
+             got:childOf got:Lyanna_stark ,
+                         got:Rega_targaryan ;
+             got:fromHouse got:Stark ;
+             got:raisedBy got:Catelyn_tully ,
+                          got:Ned_stark ;
+             got:hasAlias "King in the North"^^rdfs:Literal ;
+             got:ownsAnimal "Ghost"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Kings_landing
+got:Kings_landing rdf:type owl:NamedIndividual ,
+                           got:Town .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Lannister
+got:Lannister rdf:type owl:NamedIndividual ,
+                       got:House ;
+              got:hasMainTown got:Casterly_rock ;
+              got:hasQuote "A Lannister always pays his debt"^^rdfs:Literal ,
+                           "Hear me roar"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Lyanna_stark
+got:Lyanna_stark rdf:type owl:NamedIndividual ,
+                          got:Person ;
+                 got:fromHouse got:Stark ;
+                 got:inLoveWith got:Rega_targaryan .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Ned_stark
+got:Ned_stark rdf:type owl:NamedIndividual ,
+                       got:Lord ;
+              got:fromHouse got:Stark ;
+              got:lordOf got:Stark ;
+              got:marriedWith got:Catelyn_tully .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Petyr_baelish
+got:Petyr_baelish rdf:type owl:NamedIndividual ;
+                  got:loves got:Catelyn_tully ;
+                  got:hasAlias "Little finger" .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Pyke
+got:Pyke rdf:type owl:NamedIndividual ,
+                  got:Town .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Rega_targaryan
+got:Rega_targaryan rdf:type owl:NamedIndividual ,
+                            got:Person ;
+                   got:fromHouse got:Targaryen ;
+                   got:inLoveWith got:Lyanna_stark .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Riverrun
+got:Riverrun rdf:type owl:NamedIndividual ,
+                      got:Town .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Robert_baratheon
+got:Robert_baratheon rdf:type owl:NamedIndividual ,
+                              got:King ;
+                     got:fromHouse got:Baratheon ;
+                     got:loves got:Lyanna_stark ;
+                     got:marriedWith got:Cersei_lannister .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Robert_stark
+got:Robert_stark rdf:type owl:NamedIndividual ,
+                          got:Person ;
+                 got:childOf got:Catelyn_tully ,
+                             got:Ned_stark ;
+                 got:fromHouse got:Stark ;
+                 got:raisedBy got:Catelyn_tully ,
+                              got:Ned_stark ;
+                 got:ownsAnimal "Grey Wind"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Sandor_clegane
+got:Sandor_clegane rdf:type owl:NamedIndividual ,
+                            got:Crown_members ;
+                   got:serves got:Robert_baratheon ;
+                   got:hasAlias "The Hound"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Stannis_baratheon
+got:Stannis_baratheon rdf:type owl:NamedIndividual ;
+                      got:fromHouse got:Baratheon ;
+                      got:lordOf got:Baratheon .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Stark
+got:Stark rdf:type owl:NamedIndividual ,
+                   got:House ;
+          got:hasMainTown got:Winterfell ;
+          got:hasQuote "Winter is coming"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Storms_end
+got:Storms_end rdf:type owl:NamedIndividual .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Targaryen
+got:Targaryen rdf:type owl:NamedIndividual ,
+                       got:House ;
+              got:hasMainTown <http://www.example.org/yixin/game-of-thrones/Dragon's_stone> ;
+              got:hasQuote "Fire and blood"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Theon_greyjoy
+got:Theon_greyjoy rdf:type owl:NamedIndividual ,
+                           got:Person ;
+                  got:childOf got:Balon_greyjoy ;
+                  got:fromHouse got:Greyjoy ;
+                  got:raisedBy got:Catelyn_tully ,
+                               got:Ned_stark .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Tully
+got:Tully rdf:type owl:NamedIndividual ,
+                   got:House ;
+          got:hasMainTown got:Riverrun ;
+          got:hasQuote "Family. Duty. Honour."^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Tyrion_lannister
+got:Tyrion_lannister rdf:type owl:NamedIndividual ,
+                              got:Person ;
+                     got:childOf got:Tywin_lannister ;
+                     got:fromHouse got:Lannister ;
+                     got:hasAlias "The Imp"^^rdfs:Literal .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Tywin_lannister
+got:Tywin_lannister rdf:type owl:NamedIndividual ,
+                             got:Lord ;
+                    got:fromHouse got:Lannister ;
+                    got:lordOf got:Lannister .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Varys
+got:Varys rdf:type owl:NamedIndividual .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Winterfell
+got:Winterfell rdf:type owl:NamedIndividual ,
+                        got:Town .
+
+
+###  http://www.example.org/yixin/game-of-thrones/Dragon's_stone
+<http://www.example.org/yixin/game-of-thrones/Dragon's_stone> rdf:type owl:NamedIndividual ,
+                                                                       got:Town .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
