@@ -45,5 +45,4 @@ of the aliveness of a person at a given season!
 - *Who killed my favorite guy?* Introduce a relation of who killed who
 - *Which battles I have been to?* Introduce notable battles and those who fought in the battle! 
 - *Magic creatures?* There exists magic creatures in the story, some owns and loves them, some battles against them! - Introduce them in the Ontology
-<img src="https://gifdb.com/gif/dragon-game-of-thrones-angry-h109ai5czbowkuee.html?embed=true", alt="dragon"/ >
 
