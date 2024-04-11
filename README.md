@@ -32,6 +32,7 @@ Aligned with the storyline of Season 1, some of the notable relations are:
     2.	Every House has a capital city, namely Main Town
 - Disjointness: Some characters claimed their rights of inheritance of Iron Throne but do not have the rights based on the Law of Westeros. Therefore, *rightful_heir* and *claimed_rightful_heir* are disjoint with each other. 
 Similarly, Some person might be married with another person but NOT necessarily in love with each other, and vice versa (So sad, huh?). Therefore, *marriedWith* is disjoint with *inLoveWith*
+<img src = "https://preview.redd.it/fsbm38y2fdx61.jpg?auto=webp&s=51767bc8c44ad551245c77ffffb547ae49aca6f5">
 
 **Implicit**:
 -   Equivalence: Every person is a rightful heir if raised by a King
@@ -44,5 +45,5 @@ of the aliveness of a person at a given season!
 - *Who killed my favorite guy?* Introduce a relation of who killed who
 - *Which battles I have been to?* Introduce notable battles and those who fought in the battle! 
 - *Magic creatures?* There exists magic creatures in the story, some owns and loves them, some battles against them! - Introduce them in the Ontology
-
+<img src="https://gifdb.com/gif/dragon-game-of-thrones-angry-h109ai5czbowkuee.html?embed=true", alt="dragon"/ >
 
